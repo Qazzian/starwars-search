@@ -44,10 +44,16 @@ class App extends Component {
 	onSearch(event) {
 		const inputValue = event.target.value;
 		this.setState({ searchTerm: inputValue });
-		this.swApi.searchNames(inputValue)
-			.then((foundCharacters) => {
-				this.setState({ searchResults: foundCharacters });
-			});
+
+		if (inputValue) {
+			this.swApi.searchNames(inputValue)
+				.then((foundCharacters) => {
+					this.setState({ searchResults: foundCharacters });
+				});
+		}
+		else {
+			this.setState({ searchResults: [] });
+		}
 
 	}
 }

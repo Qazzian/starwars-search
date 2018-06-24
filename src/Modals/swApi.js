@@ -11,7 +11,7 @@ export default class swApi {
 				return response.json();
 			}
 		}).then((responseJson) => {
-			if (responseJson && responseJson.count) {
+			if (responseJson) {
 				return responseJson.results;
 			}
 		});
