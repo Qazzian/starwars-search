@@ -5,3 +5,7 @@ body {
   background-color: #222;
   color: white;
 }
+
+a {
+  color: rgb(255, 227, 0);
+}

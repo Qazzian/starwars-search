@@ -1,24 +1,31 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .App-logo {
-  height: 80px;
+	height: 80px;
 }
 
 .App-header {
-  padding: 20px;
-  color: rgb(255, 227, 0);
-  display: flex;
-  justify-content: start;
-  align-items: center;
+	padding: 20px;
+	color: rgb(255, 227, 0);
+	display: flex;
+	justify-content: start;
+	align-items: center;
 }
 
 .App-title {
-  font-size: 1.5em;
+	font-size: 1.5em;
 }
 
 .App-body {
-  font-size: large;
+	float: left;
+	font-size: large;
+	width: 50%;
+}
+
+.App-selected {
+	float: right;
+	width: 50%;
 }
 

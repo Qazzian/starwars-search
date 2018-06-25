@@ -1,18 +1,17 @@
 import React from 'react';
 
-class SearchInput extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+import './SearchInput.css';
 
+class SearchInput extends React.Component {
 	render() {
 		return (
-			<input name="characterName"
-				   value={this.props.search}
-				   onChange={this.props.onChange}/>
+			<input
+				className="SearchInput"
+				name="characterName"
+				value={ this.props.search }
+				onChange={ this.props.onChange }/>
 		);
 	}
-
 };
 
 export default SearchInput;
