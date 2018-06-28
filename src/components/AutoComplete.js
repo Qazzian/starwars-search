@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './Autocomplete.css';
+import './AutoComplete.css';
 
-class Autocomplete extends React.Component {
+class AutoComplete extends React.Component {
 	render() {
 		if (this.props.searchResults.length > 0) {
 			return this.resultList(this.props.searchResults);
@@ -30,4 +30,4 @@ class Autocomplete extends React.Component {
 	}
 }
 
-export default Autocomplete;
+export default AutoComplete;

@@ -5,26 +5,24 @@ import './App.css';
 import swApi from './Modals/swApi';
 
 import SearchInput from './components/SearchInput';
-import Autocomplete from './components/Autocomplete';
+import AutoComplete from './components/AutoComplete';
+import CharacterProfile from './components/CharacterProfile';
 
 class App extends Component {
 	constructor(props) {
 		super(props);
-		this.swApi = new swApi();
 		this.state = {
 			searchTerm: '',
 			searchResults: [],
 			selectedCharacter: null,
+			errorMessage: '',
 		};
 
+		this.onFetchError = this.onFetchError.bind(this);
 		this.onSearch = this.onSearch.bind(this);
 		this.onSelectPerson = this.onSelectPerson.bind(this);
-	}
 
-	autocompleteTemplate() {
-		return this.state.searchResults.map((person) => {
-			return (<li>{ person.name }</li>);
-		});
+		this.swApi = new swApi(this.onFetchError);
 	}
 
 	render() {
@@ -36,11 +34,12 @@ class App extends Component {
 				</header>
 				<div className="App-body">
 					<SearchInput search={ this.state.searchTerm } onChange={ this.onSearch }/>
-					<Autocomplete searchResults={ this.state.searchResults }
+					<ErrorMessage message={ this.state.errorMessage }/>
+					<AutoComplete searchResults={ this.state.searchResults }
 								  selectPerson={ this.onSelectPerson }/>
 				</div>
 				<div className="App-selected">
-					{this.state.selectedCharacter}
+					<CharacterProfile characterUrl={this.state.selectedCharacter} swApi={this.swApi}/>
 				</div>
 
 			</section>
@@ -49,7 +48,10 @@ class App extends Component {
 
 	onSearch(event) {
 		const inputValue = event.target.value;
-		this.setState({ searchTerm: inputValue });
+		this.setState({
+			searchTerm: inputValue,
+			errorMessage: '',
+		});
 
 		if (inputValue) {
 			this.swApi.searchNames(inputValue)
@@ -58,6 +60,7 @@ class App extends Component {
 				});
 		}
 		else {
+			this.swApi.abortRequest();
 			this.setState({ searchResults: [] });
 		}
 
@@ -66,6 +69,24 @@ class App extends Component {
 	onSelectPerson(event) {
 		event.preventDefault();
 		this.setState({ selectedCharacter: event.target.href });
+	}
+
+	onFetchError(error) {
+		this.setState({
+			errorMessage: 'Could not connect to the internet. Please check your network connection.',
+			searchResults: [],
+			selectedCharacter: null,
+		});
+	}
+}
+
+class ErrorMessage extends React.Component {
+	render() {
+		return (
+			<p className="App-error">
+				{ this.props.message }
+			</p>
+		);
 	}
 }
 
