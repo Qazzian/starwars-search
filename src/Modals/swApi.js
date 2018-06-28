@@ -1,18 +1,26 @@
+import Cache from './Cache';
+
 export default class swApi {
 	constructor(errorHandler) {
 		this.rootUrl = 'https://swapi.co/api/';
 		this.errorHandler = errorHandler;
+		this.cache = new Cache();
 	}
 
 	fetchRequest(url, options = {}) {
+		if (this.cache.hasKey(url)) {
+			return Promise.resolve(this.cache.getKey(url));
+		}
+
 		return window.fetch(url, options).then((response) => {
 			if (response.ok && response.status === 200) {
+				this.cache.setKey(url, response);
 				return response.json();
 			}
 			else {
 				throw new Error(`Connection Error: ${response.status}`);
 			}
-		})
+		});
 	}
 
 	searchNames(search) {
@@ -24,6 +32,7 @@ export default class swApi {
 
 		return this.fetchRequest(url, options).then((responseJson) => {
 			if (responseJson && responseJson.results) {
+				this.cacheResponseList(responseJson.results);
 				return responseJson.results;
 			}
 			else {
@@ -82,5 +91,11 @@ export default class swApi {
 			}
 			return '';
 		});
+	}
+
+	cacheResponseList(responseList) {
+		responseList.forEach((item) => {
+			this.cache.setKey(item.url, item);
+		})
 	}
 }
