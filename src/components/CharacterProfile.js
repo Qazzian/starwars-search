@@ -3,6 +3,7 @@ import React from 'react';
 import './CharacterProfile.css';
 
 import ObjectName from './characterProfile/ObjectName';
+import FilmList from './characterProfile/FilmList';
 
 class CharacterProfile extends React.Component {
 	constructor(props) {
@@ -33,6 +34,7 @@ class CharacterProfile extends React.Component {
 					</p>
 					<p>Born: {this.state.characterProfile.birth_year}</p>
 					<p>Home world: <ObjectName url={this.state.characterProfile.homeworld} swApi={this.swApi}/></p>
+					<FilmList filmList={this.state.characterProfile.films} swApi={this.swApi}/>
 				</div>
 			</article>
 		);

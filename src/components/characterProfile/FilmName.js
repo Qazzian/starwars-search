@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ObjectName extends React.Component {
+export default class FilmName extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -13,9 +13,13 @@ class ObjectName extends React.Component {
 	}
 
 	fetchObjectName(url) {
-		this.props.swApi.fetchItemName(this.props.url).then((response) => {
-			if (response) {
-				this.setState({ name: response });
+		this.props.swApi.fetchRequest(url).then((responseJson) => {
+			if (responseJson && responseJson.title) {
+				this.setState({ name: responseJson.title });
+				console.info('film title: ', responseJson.title);
+			}
+			else {
+				this.setState({ name: '' });
 			}
 		});
 	}
@@ -26,10 +30,9 @@ class ObjectName extends React.Component {
 
 	componentDidUpdate(prev) {
 		if (this.props.url !== prev.url) {
-			this.setState({name: ''});
+			this.setState({ name: '' });
 			this.fetchObjectName(this.props.url);
 		}
 	}
 }
 
-export default ObjectName;

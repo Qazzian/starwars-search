@@ -1,0 +1,9 @@
+.App-character-film-list h3 {
+	margin: 1rem 0 0.5rem;
+}
+
+.App-character-film-list ul {
+	list-style: none;
+	margin-top: 0;
+	padding-left: 0;
+}

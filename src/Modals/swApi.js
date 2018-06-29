@@ -14,8 +14,11 @@ export default class swApi {
 
 		return window.fetch(url, options).then((response) => {
 			if (response.ok && response.status === 200) {
-				this.cache.setKey(url, response);
-				return response.json();
+				const jsonPromise = response.json()
+				jsonPromise.then((jsonResponse) => {
+					this.cache.setKey(url, jsonResponse);
+				});
+				return jsonPromise;
 			}
 			else {
 				throw new Error(`Connection Error: ${response.status}`);
