@@ -36,9 +36,5 @@ describe('ObjectName', () => {
 			expect(div.textContent).toEqual('test1');
 			ReactDOM.unmountComponentAtNode(div);
 		}, 10);
-
-
 	});
-
-
 });

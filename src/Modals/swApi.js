@@ -88,6 +88,9 @@ export default class swApi {
 	}
 
 	fetchItemName(url) {
+		if (typeof url !== 'String' || url === 'unknown') {
+			return Promise.resolve('unknown');
+		}
 		return this.fetchRequest(url).then((responseJson) => {
 			if (responseJson && responseJson.name) {
 				return responseJson.name;
