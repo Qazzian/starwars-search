@@ -3,6 +3,7 @@ import React from 'react';
 import './CharacterProfile.css';
 
 import ObjectName from './characterProfile/ObjectName';
+import SpeciesName from './characterProfile/SpeciesName';
 import FilmList from './characterProfile/FilmList';
 
 class CharacterProfile extends React.Component {
@@ -29,7 +30,10 @@ class CharacterProfile extends React.Component {
 					<p className="App-character-profile__species-gender">
 						<span>{this.state.characterProfile.gender}</span>
 						{' '}
-						<span><ObjectName url={this.state.characterProfile.species} swApi={this.swApi}/></span>
+						<span><SpeciesName
+							urls={this.state.characterProfile.species}
+							swApi={this.swApi}/>
+						</span>
 
 					</p>
 					<p>Born: {this.state.characterProfile.birth_year}</p>
@@ -41,7 +45,7 @@ class CharacterProfile extends React.Component {
 	}
 
 	componentDidMount() {
-
+		this.getCharacterData();
 	}
 
 	componentDidUpdate(prev) {
@@ -52,7 +56,6 @@ class CharacterProfile extends React.Component {
 
 	getCharacterData() {
 		this.swApi.fetchPersonDetails(this.props.characterUrl).then((responses) => {
-			console.info('fetchPersonDetails response:', responses);
 			this.setState({characterProfile: responses});
 		})
 	}

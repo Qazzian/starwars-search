@@ -2,18 +2,18 @@
   "name": "starwars-search",
   "version": "0.1.0",
   "private": true,
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"test:debug": "react-scripts --inspect-brk test --runInBand --env=jsdom",
+		"coverage": "react-scripts test --env=jsdom --coverage",
+		"eject": "react-scripts eject"
+	},
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "test:debug": "react-scripts --inspect-brk test --runInBand --env=jsdom",
-    "coverage": "react-scripts test --env=jsdom --coverage",
-    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "jest-fetch-mock": "^1.6.5"

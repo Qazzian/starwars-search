@@ -7,7 +7,6 @@ import swApi from '../Modals/swApi';
 const mockApi = {
 	mockPerson: null,
 	fetchPersonDetails: (url) => {
-		console.info('fetch person', url);
 		return Promise.resolve(mockApi.mockPerson);
 	}
 };

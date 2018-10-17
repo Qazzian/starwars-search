@@ -16,7 +16,6 @@ export default class FilmName extends React.Component {
 		this.props.swApi.fetchRequest(url).then((responseJson) => {
 			if (responseJson && responseJson.title) {
 				this.setState({ name: responseJson.title });
-				console.info('film title: ', responseJson.title);
 			}
 			else {
 				this.setState({ name: '' });

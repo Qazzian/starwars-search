@@ -14,7 +14,7 @@ export default class swApi {
 
 		return window.fetch(url, options).then((response) => {
 			if (response.ok && response.status === 200) {
-				const jsonPromise = response.json()
+				const jsonPromise = response.json();
 				jsonPromise.then((jsonResponse) => {
 					this.cache.setKey(url, jsonResponse);
 				});
@@ -82,13 +82,15 @@ export default class swApi {
 	fetchItemNames(urls) {
 		const urlList = !Array.isArray(urls) ? [urls] : urls;
 
-		Promise.all(urlList.map((url) => {
+		return Promise.all(urlList.map((url) => {
 			return this.fetchItemName(url);
-		}));
+		})).then((results) => {
+			return results;
+		});
 	}
 
 	fetchItemName(url) {
-		if (typeof url !== 'String' || url === 'unknown') {
+		if (typeof url !== 'string' || url === 'unknown') {
 			return Promise.resolve('unknown');
 		}
 		return this.fetchRequest(url).then((responseJson) => {

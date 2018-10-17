@@ -41,7 +41,6 @@ class App extends Component {
 				<div className="App-selected">
 					<CharacterProfile characterUrl={this.state.selectedCharacter} swApi={this.swApi}/>
 				</div>
-
 			</section>
 		);
 	}
